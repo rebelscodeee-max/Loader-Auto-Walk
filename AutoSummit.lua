@@ -37,7 +37,7 @@ return {
     },
 
     {
-        Name = "Mount Arunika",
+        Name = "Mount Arunika (Bukan Coord Sebenarnya)",
         Delay = 0.25,
         Checkpoints = {
             CFrame.new(210, 90, 120),
@@ -48,7 +48,7 @@ return {
     },
 
     {
-        Name = "Mount Daun",
+        Name = "Mount Daun (Bukan Coord Sebenarnya)",
         Delay = 0.35,
         Checkpoints = {
             CFrame.new(50, 70, 50),
@@ -58,3 +58,4 @@ return {
         }
     }
 }
+
