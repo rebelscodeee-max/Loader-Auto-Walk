@@ -8,6 +8,7 @@ local player = Players.LocalPlayer
 -- GUI MAIN FRAME
 local gui = Instance.new("ScreenGui")
 gui.Name = "MusicPlayer"
+gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
