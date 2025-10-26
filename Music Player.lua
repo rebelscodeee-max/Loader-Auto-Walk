@@ -141,8 +141,15 @@ local songs = {
 	{ Name="Jamilah Itu Bukan Anunya Aisyah", Id="116255319981650" },
 	{ Name="Pong Pong Enak", Id="90471492509215" },
 	{ Name="Funkot Stesu Stesu Stelan Suka", Id="105935548669522" },
+	{ Name="Cikini", Id="122665842844850" },
+	{ Name="ABG TUA", Id="139825186779265" },
+	{ Name="MAIMUNA JAMILA LAMBADA", Id="101351410845508" },
+	{ Name="Hari itu gajian - Lembur", Id="132479837761371" },
+	{ Name="Sudah", Id="85010781923163" },
+	{ Name="Paradise Fall", Id="1837879082" },
 	{ Name="DJ Sayang Culik aku dong", Id="119254319180287" }
 }
+
 
 local sound = Instance.new("Sound")
 sound.Parent = workspace
