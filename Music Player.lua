@@ -69,13 +69,7 @@ Instance.new("UICorner", miniBtn).CornerRadius = UDim.new(0,25)
 local isMinimized = false
 
 closeBtn.MouseButton1Click:Connect(function()
-	if not isMinimized then
-		isMinimized = true
-		miniBtn.Visible = true
-		TweenService:Create(frame,TweenInfo.new(0.4,Enum.EasingStyle.Quad),{Position=UDim2.new(0.5,-230,1,100)}):Play()
-		task.wait(0.4)
-		frame.Visible = false
-	end
+	gui:Destroy() -- ADDED (destroy instead minimize)
 end)
 
 miniBtn.MouseButton1Click:Connect(function()
@@ -123,11 +117,10 @@ songLabel.Parent = frame
 local songBox = Instance.new("TextBox")
 songBox.Size = UDim2.new(0, 120, 0, 20)
 songBox.Position = UDim2.new(0, 270, 0, 70)
-songBox.Text = ""
 songBox.Font = Enum.Font.GothamBold
-songBox.TextColor3 = Color3.fromRGB(0,0,0)
-songBox.BackgroundColor3 = Color3.fromRGB(230,230,230)
 songBox.TextScaled = true
+songBox.BackgroundColor3 = Color3.fromRGB(230,230,230)
+songBox.TextColor3 = Color3.fromRGB(0,0,0)
 songBox.Parent = frame
 Instance.new("UICorner", songBox).CornerRadius = UDim.new(0, 8)
 
@@ -150,7 +143,6 @@ local songs = {
 	{ Name="DJ Sayang Culik aku dong", Id="119254319180287" }
 }
 
-
 local sound = Instance.new("Sound")
 sound.Parent = workspace
 sound.Volume = tonumber(volumeBox.Text) or 0.5
@@ -163,6 +155,7 @@ local function GetSongName(id)
 end
 
 local current = 1
+local loopEnabled = true -- ADDED
 
 -- PLAYLIST UI
 local listFrame = Instance.new("Frame")
@@ -255,6 +248,25 @@ local stopBtn = createButton("■", UDim2.new(0, 160, 0, 100))
 local nextBtn = createButton("⏭", UDim2.new(0, 230, 0, 100))
 local prevBtn = createButton("⏮", UDim2.new(0, 300, 0, 100))
 
+-- LOOP BUTTON (ADDED)
+local loopBtn = createButton("🔁", UDim2.new(0, 370, 0, 100))
+
+local function UpdateLoopUI()
+	if loopEnabled then
+		loopBtn.BackgroundColor3 = AppleRed
+		loopBtn.TextColor3 = Color3.fromRGB(255,255,255)
+	else
+		loopBtn.BackgroundColor3 = Color3.fromRGB(35,35,35)
+		loopBtn.TextColor3 = AppleRed
+	end
+end
+UpdateLoopUI()
+
+loopBtn.MouseButton1Click:Connect(function()
+	loopEnabled = not loopEnabled
+	UpdateLoopUI()
+end)
+
 playBtn.MouseButton1Click:Connect(function() if not sound.IsPlaying then sound:Play() end end)
 pauseBtn.MouseButton1Click:Connect(function() if sound.IsPlaying then sound:Pause() end end)
 stopBtn.MouseButton1Click:Connect(function() sound:Stop() end)
@@ -281,7 +293,7 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
--- INPUT HANDLERS
+-- ADD SONG
 songBox.FocusLost:Connect(function(enter)
 	if enter and tonumber(songBox.Text) then
 		local id = songBox.Text
@@ -292,6 +304,7 @@ songBox.FocusLost:Connect(function(enter)
 	end
 end)
 
+-- VOLUME
 volumeBox.FocusLost:Connect(function(enter)
 	if enter then
 		local vol = tonumber(volumeBox.Text)
@@ -301,7 +314,7 @@ volumeBox.FocusLost:Connect(function(enter)
 	end
 end)
 
--- DRAG WINDOW
+-- DRAG MAIN
 local dragToggle, dragStart, startPos
 frame.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -341,4 +354,18 @@ miniBtn.InputEnded:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
 		dragMini = false
 	end
+end)
+
+-- AUTO NEXT SONG (ADDED)
+sound.Ended:Connect(function()
+	if loopEnabled then
+		current = current + 1
+		if current > #songs then
+			current = 1
+		end
+	else
+		if current >= #songs then return end
+		current = current + 1
+	end
+	PlaySong(current)
 end)
