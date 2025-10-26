@@ -13,11 +13,6 @@ gui.Name = "MusicPlayer"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
--- World Blur
-local blur = Instance.new("BlurEffect", Lighting)
-blur.Enabled = true
-blur.Size = 8
-
 -- Main Panel
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 460, 0, 410)
