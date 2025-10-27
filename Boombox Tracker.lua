@@ -1,7 +1,3 @@
---[[
-	Boombox Tracker - Enhanced Version
-	Features: Auto-scaling UI, Fixed button layout, Close/Minimize support
-]]
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -9,7 +5,6 @@ local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- Auto-detect platform and scale accordingly
 local isMobile = UserInputService.TouchEnabled and not UserInputService.MouseEnabled
 local scaleFactor = isMobile and 1.2 or 1.0
 
@@ -59,7 +54,6 @@ title.Font = Enum.Font.GothamBold
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.TextScaled = isMobile
 
--- Button container for proper alignment
 local buttonContainer = Instance.new("Frame", header)
 buttonContainer.Size = UDim2.new(0, 130 * scaleFactor, 1, 0)
 buttonContainer.Position = UDim2.new(1, -135 * scaleFactor, 0, 0)
@@ -79,7 +73,6 @@ local function makeHeaderButton(name, text, order)
 	local r = Instance.new("UICorner", b)
 	r.CornerRadius = UDim.new(0, 6)
 	
-	-- Hover effect
 	b.MouseEnter:Connect(function()
 		TweenService:Create(b, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(75, 75, 75)}):Play()
 	end)
@@ -93,7 +86,6 @@ end
 local btnMinimize = makeHeaderButton("MinimizeBtn", "─", 1)
 local btnClose = makeHeaderButton("CloseBtn", "✕", 2)
 
--- Secondary buttons row
 local buttonRow = Instance.new("Frame", panel)
 buttonRow.Name = "ButtonRow"
 buttonRow.Size = UDim2.new(1, -16 * scaleFactor, 0, 36 * scaleFactor)
@@ -308,12 +300,12 @@ local function createEntry(soundId, ownerName, soundName)
 	end)
 end
 
--- Close button functionality
+
 btnClose.MouseButton1Click:Connect(function()
 	screenGui:Destroy()
 end)
 
--- Minimize button functionality
+
 btnMinimize.MouseButton1Click:Connect(function()
 	isMinimized = not isMinimized
 	local targetSize = isMinimized and UDim2.new(0, PANEL_W, 0, 50 * scaleFactor) or UDim2.new(0, PANEL_W, 0, PANEL_H)
@@ -325,7 +317,7 @@ btnMinimize.MouseButton1Click:Connect(function()
 	btnMinimize.Text = isMinimized and "□" or "─"
 end)
 
--- Clear button
+
 btnClear.MouseButton1Click:Connect(function()
 	for _, v in pairs(scroll:GetChildren()) do
 		if v:IsA("Frame") then v:Destroy() end
@@ -336,7 +328,7 @@ btnClear.MouseButton1Click:Connect(function()
 	showToast("Cleared all entries")
 end)
 
--- Copy All button
+
 btnCopyAll.MouseButton1Click:Connect(function()
 	local ids = {}
 	for _, v in pairs(scroll:GetChildren()) do
@@ -372,7 +364,7 @@ btnCopyAll.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Toggle button
+
 local contentVisible = true
 btnToggle.MouseButton1Click:Connect(function()
 	contentVisible = not contentVisible
@@ -381,7 +373,7 @@ btnToggle.MouseButton1Click:Connect(function()
 	showToast(contentVisible and "List shown" or "List hidden")
 end)
 
--- Dragging functionality
+
 local dragging = false
 local dragInput, dragStart, startPos
 
@@ -423,7 +415,7 @@ UserInputService.InputChanged:Connect(function(input)
 	end
 end)
 
--- Boombox detection functions
+
 local function findBoomboxOwner(sound)
 	local cur = sound
 	for i = 1, 6 do
@@ -474,7 +466,7 @@ local function handlePotentialSound(sound)
 	end
 end
 
--- Initial scan
+
 for _, v in pairs(workspace:GetDescendants()) do
 	if v:IsA("Sound") and v.SoundId ~= "" then
 		task.delay(0.05, function() 
@@ -483,7 +475,7 @@ for _, v in pairs(workspace:GetDescendants()) do
 	end
 end
 
--- Listen for new sounds
+
 workspace.DescendantAdded:Connect(function(desc)
 	if desc:IsA("Sound") then
 		task.delay(0.05, function()
