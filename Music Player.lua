@@ -150,6 +150,16 @@ local songs = {
 	{ Name="Mente MA", Id="98337901681441" },
 	{ Name="Miksue der a go", Id="112753938971674" },
 	{ Name="Duka", Id="99643379703532" },
+	{ Name="DOLA", Id="139590201617508" },
+	{ Name="KNMH", Id="130721206402716" },
+	{ Name="TANPA JUDUL", Id="128153179827416" },
+	{ Name="PASO", Id="114138177515042" },
+	{ Name="TANPA JUDUL", Id="88691296316236" },
+	{ Name="TANPA JUDUL", Id="118390472006859" },
+	{ Name="TANPA JUDUL", Id="88530410077744" },
+	{ Name="DJ WG X LIKE", Id="94813987448722" },
+	{ Name="DJ feel good", Id="117978799487777" },
+	{ Name="DJ cuma kamu", Id="112953653423739" },
 	{ Name="DJ Sayang Culik aku dong", Id="119254319180287" }
 }
 local sound = Instance.new("Sound", workspace)
