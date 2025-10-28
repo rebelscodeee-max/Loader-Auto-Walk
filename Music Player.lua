@@ -173,6 +173,10 @@ local songs = {
 	{ Name="TANPA JUDUL", Id="133857865643061" },
 	{ Name="TANPA JUDUL", Id="16662832435" },
 	{ Name="TANTEE", Id="116647235474599" },
+	{ Name="Terry Zhong Feat. Conro - Play It Cool", Id="7029017448" },
+	{ Name="WHAT I DIDN’T SAY", Id="117400586583464" },
+	{ Name="I Believe in You", Id="139126792827321" },
+	{ Name="I Will Wait", Id="109931695789778" },
 	{ Name="DJ Sayang Culik aku dong", Id="119254319180287" }
 }
 local sound = Instance.new("Sound", workspace)
