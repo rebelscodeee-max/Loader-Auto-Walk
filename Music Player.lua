@@ -186,6 +186,7 @@ local songs = {
 	{ Name="Salah Dola-dola", Id="139590201617508" },
 	{ Name="TANPA JUDUL", Id="111417042398302" },
 	{ Name="VOW", Id="73582098001514" },
+	{ Name="Dancing with Ghosts in the Rain", Id="95950616799357" },
 	{ Name="DJ Sayang Culik aku dong", Id="119254319180287" }
 }
 local sound = Instance.new("Sound", workspace)
